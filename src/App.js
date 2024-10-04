@@ -1,11 +1,19 @@
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Main from './components/Main';
+import Nav from './components/Nav';
+
 import './App.css';
 
 function App() {
-  return (
-    <div>
-      Little Lemon WebApp
-    </div>
-  );
+    return (
+        <>
+            <Header />
+            <Nav />
+            <Main />
+            <Footer />
+        </>
+    );
 }
 
 export default App;
