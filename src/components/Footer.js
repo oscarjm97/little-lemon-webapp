@@ -1,43 +1,41 @@
+import '../styles/Footer.css';
+
 function Footer() {
     return (
-        <footer>
+        <footer className='footer'>
             <img src='' alt='Footer'></img>
 
             <div>
                 <h4>Dormat Navigation</h4>
-                <ul>
-                    <li>
-                        <a href='/'>Home</a>
-                    </li>
-                    <li>
-                        <a href='/about'>About</a>
-                    </li>
-                    <li>
-                        <a href='/menu'>Menu</a>
-                    </li>
-                    <li>
-                        <a href='/reservations'>Reservations</a>
-                    </li>
-                    <li>
-                        <a href='/order'>Order Online</a>
-                    </li>
-                    <li>
-                        <a href='/login'>Login</a>
-                    </li>
-                </ul>
+                <div className='footer-links'>
+                    <a href='/'>Home</a>
+                    <a href='/about'>About</a>
+                    <a href='/menu'>Menu</a>
+                    <a href='/reservations'>Reservations</a>
+                    <a href='/order'>Order Online</a>
+                    <a href='/login'>Login</a>
+                </div>
             </div>
 
-			<div>
+            <div>
                 <h4>Contact</h4>
-                <span>Address</span><br />
-				<span>Phone number</span><br />
-				<span>myemail@gmail.com</span>
+                <span>Address</span>
+                <br />
+                <span>Phone number</span>
+                <br />
+                <span>myemail@gmail.com</span>
             </div>
 
-			<div>
+            <div>
                 <h4>Social Media Links</h4>
-                <span>Instagram</span><br />
-				<span>Facebook</span>
+                <div className='footer-links'>
+                    <a href='https://www.instagram.com' target='_blank' rel='noopener noreferrer'>
+                        Instagram
+                    </a>
+                    <a href='https://www.facebook.com' target='_blank' rel='noopener noreferrer'>
+                        Facebook
+                    </a>
+                </div>
             </div>
         </footer>
     );
