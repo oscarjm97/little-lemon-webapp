@@ -1,14 +1,15 @@
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Main from './components/Main';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import BookingPage from './pages/BookingPage';
+import HomePage from './pages/HomePage';
 
 function App() {
     return (
-        <>
-            <Header />
-            <Main />
-            <Footer />
-        </>
+        <Router>
+            <Routes>
+                <Route path='/' element={<HomePage />}></Route>
+                <Route path='/booking' element={<BookingPage />}></Route>
+            </Routes>
+        </Router>
     );
 }
 

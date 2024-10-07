@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import '../styles/Footer.css';
 
 function Footer() {
@@ -8,12 +10,12 @@ function Footer() {
             <div>
                 <h4>Dormat Navigation</h4>
                 <div className='footer-links'>
-                    <a href='/'>Home</a>
-                    <a href='/about'>About</a>
-                    <a href='/menu'>Menu</a>
-                    <a href='/reservations'>Reservations</a>
-                    <a href='/order'>Order Online</a>
-                    <a href='/login'>Login</a>
+                    <Link to='/'>Home</Link>
+                    <Link to='/about'>About</Link>
+                    <Link to='/menu'>Menu</Link>
+                    <Link to='/booking'>Reservations</Link>
+                    <Link to='/order'>Order Online</Link>
+                    <Link to='/login'>Login</Link>
                 </div>
             </div>
 
@@ -23,18 +25,20 @@ function Footer() {
                 <br />
                 <span>Phone number</span>
                 <br />
-                <span>myemail@gmail.com</span>
+                <Link to='mailto:myemail@gmail.com' underline='hover'>
+                    myemail@gmail.com
+                </Link>
             </div>
 
             <div>
                 <h4>Social Media Links</h4>
                 <div className='footer-links'>
-                    <a href='https://www.instagram.com' target='_blank' rel='noopener noreferrer'>
+                    <Link to='https://www.instagram.com' target='_blank' rel='noopener noreferrer'>
                         Instagram
-                    </a>
-                    <a href='https://www.facebook.com' target='_blank' rel='noopener noreferrer'>
+                    </Link>
+                    <Link to='https://www.facebook.com' target='_blank' rel='noopener noreferrer'>
                         Facebook
-                    </a>
+                    </Link>
                 </div>
             </div>
         </footer>
