@@ -28,7 +28,7 @@ function Nav() {
                 </li>
                 <li>
                     <Link to='/order'>
-                        Order Online
+                        Order
                     </Link>
                 </li>
                 <li>
