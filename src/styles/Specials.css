@@ -1,0 +1,71 @@
+.specials {
+    margin: 1rem 0;
+}
+
+.title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-section button {
+    width: 150px;
+    height: 35px;
+    background-color: #495e57;
+    color: #edefee;
+    border: 0;
+    border-radius: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+}
+
+.card-item {
+    background-color: antiquewhite;
+    border-radius: 16px;
+}
+
+.card-item img {
+    border-radius: 16px;
+}
+
+.card-item p {
+    margin-top: 0;
+    color: #333;
+}
+
+.card-item button {
+    border: none;
+    background-color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.card-item-text {
+    padding: 0 1rem 1rem 1rem;
+}
+
+.card-item-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0 1rem;
+}
+
+.card-item-title h4 {
+    margin: 0;
+}
+
+.card-item-title span {
+    color: #ee9972;
+    font-weight: 700;
+}
