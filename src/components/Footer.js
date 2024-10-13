@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import Copyright from '../assets/copyright.png';
 
 import '../styles/Footer.css';
 
 function Footer() {
     return (
         <footer className='footer'>
-            <img src='' alt='Footer'></img>
+            <img src={Copyright} width={200} height={100} alt='Footer'></img>
 
             <div>
                 <h4>Dormat Navigation</h4>
