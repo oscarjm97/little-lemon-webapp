@@ -1,0 +1,40 @@
+.testimonials h4 {
+    font-family: 'Markazi Text', serif;
+	font-size: 22pt;
+	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1.6rem;
+}
+
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+}
+
+.review-item {
+	background-color: #e0f0ff;
+	padding: 1rem;
+	border-radius: 16px;
+}
+
+.review-item h5 {
+	margin: 0;
+    font-family: 'Markazi Text', serif;
+    font-size: 14pt;
+}
+
+.review-item span {
+	font-size: 10pt;
+}
+
+.profile {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.profile img {
+	border-radius: 16px;
+}
