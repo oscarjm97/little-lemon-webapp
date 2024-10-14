@@ -6,7 +6,7 @@ import '../styles/Footer.css';
 function Footer() {
     return (
         <footer className='footer'>
-            <img src={Copyright} width={200} height={100} alt='Footer'></img>
+            <img src={Copyright} width={100} height={50} alt='Footer'></img>
 
             <div>
                 <h4>Dormat Navigation</h4>
