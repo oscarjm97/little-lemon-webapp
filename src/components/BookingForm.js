@@ -1,9 +1,9 @@
 import { useEffect, useReducer, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchAPI, submitAPI } from '../utils/api';
 import { isPastDate } from '../utils/dates';
 
 import '../styles/BookingForm.css';
-import { useNavigate } from 'react-router-dom'
 
 export function initializeAvailableTimes() {
     const today = new Date();
@@ -117,7 +117,9 @@ export function BookingForm() {
                     </div>
 
                     <div className='field'>
-                        <label htmlFor='guests'>Number of guests</label>
+                        <label htmlFor='guests'>
+                            Number of guests <sup>*</sup>
+                        </label>
                         <input
                             id='guests'
                             type='number'
@@ -132,9 +134,7 @@ export function BookingForm() {
                     </div>
 
                     <div className='field'>
-                        <label htmlFor='occasion'>
-                            Occasion <sup>*</sup>
-                        </label>
+                        <label htmlFor='occasion'>Occasion</label>
                         <select id='occasion' value={occasion} onChange={(e) => setOccasion(e.target.value)}>
                             <option value='birthday'>Birthday</option>
                             <option value='anniversary'>Anniversary</option>
