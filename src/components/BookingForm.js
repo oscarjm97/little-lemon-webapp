@@ -3,7 +3,7 @@ import { initializeTimes, isPastDate, isToday } from '../utils';
 
 import '../styles/BookingForm.css';
 
-const updateAvailableTimes = (state, action) => {
+export function updateAvailableTimes(state, action) {
     if (action.selectedDate && isToday(action.selectedDate)) {
         return [...state.filter((time) => Number(time.key) > 20)];
     }
@@ -19,7 +19,7 @@ const GuestsErrorMessage = () => {
     return <p className='field-error'>Please, provide a number of guest between 1 and 10</p>;
 };
 
-function BookingForm() {
+export function BookingForm() {
     const [availableTimes, dispatch] = useReducer(updateAvailableTimes, initializeTimes());
     const [resDate, setResDate] = useState({ value: '', isTouched: false });
     const [resTime, setResTime] = useState('');
@@ -64,7 +64,7 @@ function BookingForm() {
         <div className='form'>
             <form onSubmit={handleSubmit}>
                 <fieldset>
-                    <h2>Book a Table</h2>
+                    <h2>Book a Table Now</h2>
                     <div className='field'>
                         <label htmlFor='res-date'>
                             Choose date <sup>*</sup>
@@ -126,5 +126,3 @@ function BookingForm() {
         </div>
     );
 }
-
-export default BookingForm;
