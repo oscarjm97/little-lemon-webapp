@@ -4,7 +4,7 @@ import '../styles/About.css';
 
 function About() {
     return (
-        <div className='about'>
+        <section className='about'>
             <div className='about-left'>
                 <h1 className='about-title'>Little Lemon</h1>
                 <h3 className='about-subtitle'>Chicago</h3>
@@ -18,7 +18,7 @@ function About() {
             <div className='about-right'>
                 <img src={Picture} width={300} height={230} alt='Restaurant Food'></img>
             </div>
-        </div>
+        </section>
     );
 }
 
