@@ -1,15 +1,22 @@
 import { useEffect, useReducer, useState } from 'react';
-import { initializeTimes, isPastDate, isToday } from '../utils';
+import { fetchAPI } from '../utils/api';
+import { isPastDate } from '../utils/dates';
 
 import '../styles/BookingForm.css';
 
+export function initializeAvailableTimes() {
+    const today = new Date();
+
+    return fetchAPI(today);
+}
+
 export function updateAvailableTimes(state, action) {
-    if (action.selectedDate && isToday(action.selectedDate)) {
-        return [...state.filter((time) => Number(time.key) > 20)];
+    if (action.selectedDate) {
+        return fetchAPI(new Date(action.selectedDate));
     }
 
-    return initializeTimes();
-};
+    return initializeAvailableTimes();
+}
 
 const ResDateErrorMessage = () => {
     return <p className='field-error'>Please, provide a valid date</p>;
@@ -20,14 +27,14 @@ const GuestsErrorMessage = () => {
 };
 
 export function BookingForm() {
-    const [availableTimes, dispatch] = useReducer(updateAvailableTimes, initializeTimes());
+    const [availableTimes, dispatch] = useReducer(updateAvailableTimes, initializeAvailableTimes());
     const [resDate, setResDate] = useState({ value: '', isTouched: false });
     const [resTime, setResTime] = useState('');
     const [guests, setGuests] = useState({ value: '', isTouched: false });
     const [occasion, setOccasion] = useState('birthday');
 
     useEffect(() => {
-        setResTime(availableTimes[0].key);
+        setResTime(availableTimes[0]);
     }, [availableTimes]);
 
     const isValidResDate = () => {
@@ -83,10 +90,15 @@ export function BookingForm() {
                         <label htmlFor='res-time'>
                             Choose time <sup>*</sup>
                         </label>
-                        <select id='res-time' value={resTime} onChange={(e) => setResTime(e.target.value)}>
+                        <select
+                            id='res-time'
+                            value={resTime}
+                            onChange={(e) => setResTime(e.target.value)}
+                            disabled={!isValidResDate()}
+                        >
                             {availableTimes.map((time) => (
-                                <option key={time.key} value={time.key}>
-                                    {time.value}
+                                <option key={time} value={time}>
+                                    {time}
                                 </option>
                             ))}
                         </select>
