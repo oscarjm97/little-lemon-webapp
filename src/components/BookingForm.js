@@ -1,29 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
+import { initializeTimes, isPastDate, isToday } from '../utils';
 
 import '../styles/BookingForm.css';
 
-const availableTimes = [
-	{
-		key: '18',
-		value: '18:00h'
-	},
-	{
-		key: '19',
-		value: '19:00h'
-	},
-	{
-		key: '20',
-		value: '20:00h'
-	},
-	{
-		key: '21',
-		value: '21:00h'
-	},
-	{
-		key: '22',
-		value: '22:00h'
-	}
-];
+const updateAvailableTimes = (state, action) => {
+    if (action.selectedDate && isToday(action.selectedDate)) {
+        return [...state.filter((time) => Number(time.key) > 20)];
+    }
+
+    return initializeTimes();
+};
 
 const ResDateErrorMessage = () => {
     return <p className='field-error'>Please, provide a valid date</p>;
@@ -34,28 +20,38 @@ const GuestsErrorMessage = () => {
 };
 
 function BookingForm() {
-    const [resDate, setResDate] = useState({ value: '', isTouched: false});
-    const [resTime, setResTime] = useState('18');
-    const [guests, setGuests] = useState({ value: '', isTouched: false});
+    const [availableTimes, dispatch] = useReducer(updateAvailableTimes, initializeTimes());
+    const [resDate, setResDate] = useState({ value: '', isTouched: false });
+    const [resTime, setResTime] = useState('');
+    const [guests, setGuests] = useState({ value: '', isTouched: false });
     const [occasion, setOccasion] = useState('birthday');
 
-	const isValidResDate = () => {
-		return new Date(resDate.value) >= new Date();
-	};
+    useEffect(() => {
+        setResTime(availableTimes[0].key);
+    }, [availableTimes]);
 
-	const isValidGuestsNumber = () => {
-		return Number(guests.value) > 0 && Number(guests.value) <= 10;
-	}
+    const isValidResDate = () => {
+        return resDate.value && !isPastDate(resDate.value);
+    };
 
-    const getIsFormValid = () => {
+    const isValidGuestsNumber = () => {
+        return Number(guests.value) > 0 && Number(guests.value) <= 10;
+    };
+
+    const isFormValid = () => {
         return isValidResDate() && isValidGuestsNumber();
     };
 
     const clearForm = () => {
-        setResDate({ value: '', isTouched: false});
-        setResTime('18');
-        setGuests({ value: '', isTouched: false});
+        dispatch({ selectedDate: '' });
+        setResDate({ value: '', isTouched: false });
+        setGuests({ value: '', isTouched: false });
         setOccasion('birthday');
+    };
+
+    const handleChangeResDate = (e) => {
+        setResDate({ ...resDate, value: e.target.value });
+        dispatch({ selectedDate: e.target.value });
     };
 
     const handleSubmit = (e) => {
@@ -77,7 +73,7 @@ function BookingForm() {
                             id='res-date'
                             type='date'
                             value={resDate.value}
-                            onChange={(e) => setResDate({ ...resDate, value: e.target.value })}
+                            onChange={handleChangeResDate}
                             onBlur={() => setResDate({ ...resDate, isTouched: true })}
                         />
                         {resDate.isTouched && !isValidResDate() ? <ResDateErrorMessage /> : null}
@@ -88,9 +84,11 @@ function BookingForm() {
                             Choose time <sup>*</sup>
                         </label>
                         <select id='res-time' value={resTime} onChange={(e) => setResTime(e.target.value)}>
-							{availableTimes.map((time) => (
-								<option key={time.key} value={time.key}>{time.value}</option>
-							))}
+                            {availableTimes.map((time) => (
+                                <option key={time.key} value={time.key}>
+                                    {time.value}
+                                </option>
+                            ))}
                         </select>
                     </div>
 
@@ -103,10 +101,10 @@ function BookingForm() {
                             min='1'
                             max='10'
                             value={guests.value}
-							onChange={(e) => setGuests({ ...guests, value: e.target.value })}
+                            onChange={(e) => setGuests({ ...guests, value: e.target.value })}
                             onBlur={() => setGuests({ ...guests, isTouched: true })}
                         />
-						{guests.isTouched && !isValidGuestsNumber() ? <GuestsErrorMessage /> : null}
+                        {guests.isTouched && !isValidGuestsNumber() ? <GuestsErrorMessage /> : null}
                     </div>
 
                     <div className='field'>
@@ -120,7 +118,7 @@ function BookingForm() {
                         </select>
                     </div>
 
-                    <button type='submit' disabled={!getIsFormValid()}>
+                    <button type='submit' disabled={!isFormValid()}>
                         Book Table
                     </button>
                 </fieldset>
