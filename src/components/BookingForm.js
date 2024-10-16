@@ -1,8 +1,9 @@
 import { useEffect, useReducer, useState } from 'react';
-import { fetchAPI } from '../utils/api';
+import { fetchAPI, submitAPI } from '../utils/api';
 import { isPastDate } from '../utils/dates';
 
 import '../styles/BookingForm.css';
+import { useNavigate } from 'react-router-dom'
 
 export function initializeAvailableTimes() {
     const today = new Date();
@@ -32,6 +33,11 @@ export function BookingForm() {
     const [resTime, setResTime] = useState('');
     const [guests, setGuests] = useState({ value: '', isTouched: false });
     const [occasion, setOccasion] = useState('birthday');
+    const navigate = useNavigate();
+
+    const goToConfirmedBookingPage = () => {
+        navigate('/confirmed-booking');
+    };
 
     useEffect(() => {
         setResTime(availableTimes[0]);
@@ -63,7 +69,13 @@ export function BookingForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert('Table successfully booked!');
+
+        if (submitAPI(e.target)) {
+            goToConfirmedBookingPage();
+        } else {
+            alert('There was an error with your booking. Please, try it again.');
+        }
+
         clearForm();
     };
 
